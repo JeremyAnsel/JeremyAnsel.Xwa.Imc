@@ -367,11 +367,11 @@ namespace JeremyAnsel.Xwa.Imc
                     {
                         currentWord = BitConverter.ToInt16(input, inputIndex);
 
-                        bits = (bits << 8) | ((uint)currentWord >> 8) & 0xff;
+                        bits = (bits << 8) | (((uint)currentWord >> 8) & 0xff);
 
                         destBuffer[destIndex++] = (byte)(bits >> bitPtr);
 
-                        bits = (bits << 8) | (uint)currentWord & 0xff;
+                        bits = (bits << 8) | ((uint)currentWord & 0xff);
 
                         destBuffer[destIndex++] = (byte)(bits >> bitPtr);
                     }
