@@ -274,7 +274,7 @@ namespace JeremyAnsel.Xwa.Imc
                 throw new ArgumentOutOfRangeException("channelsCount");
             }
 
-            byte[] destBuffer = new byte[input.Length + channelsCount * 3];
+            byte[] destBuffer = new byte[input.Length * 2 + channelsCount * 3];
             int destIndex = 0;
 
             if (channelsCount > 1)
@@ -418,7 +418,7 @@ namespace JeremyAnsel.Xwa.Imc
                 destBuffer[destIndex++] = (byte)bits;
             }
 
-            byte[] buffer = new byte[destIndex];
+            byte[] buffer = new byte[(destIndex + 3) & (~3)];
             Array.Copy(destBuffer, buffer, destIndex);
 
             return buffer;
