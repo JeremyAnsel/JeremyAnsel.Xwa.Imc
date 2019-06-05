@@ -131,30 +131,55 @@ namespace JeremyAnsel.Xwa.Imc
                         throw new InvalidDataException();
                     }
 
-                    int imusRawSize = file.ReadInt32();
+                    //int imusRawSize = file.ReadInt32();
+                    file.ReadInt32();
 
                     if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "MAP ")
                     {
                         throw new InvalidDataException();
                     }
 
-                    ImcFile.ReadMap(imc, file, imusRawSize);
+                    ImcFile.ReadMap(imc, file /*, imusRawSize*/);
 
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "DATA")
+                    string fourcc = Encoding.ASCII.GetString(file.ReadBytes(4));
+
+                    if (fourcc == "RIFF")
+                    {
+                        file.BaseStream.Seek(-4, SeekOrigin.Current);
+
+                        //var wav = WaveFile.FromStream(file.BaseStream);
+
+                        //imc.DataRawSize = wav.Data.Length;
+
+                        //var entry = new ImcEntry
+                        //{
+                        //    Codec = 0,
+                        //    RawSize = wav.Data.Length,
+                        //    CompressedSize = wav.Data.Length,
+                        //    Data = wav.Data
+                        //};
+
+                        //imc.Entries.Add(entry);
+
+                        imc.SetRawDataFromWave(file.BaseStream);
+                    }
+                    else if (fourcc == "DATA")
+                    {
+                        imc.DataRawSize = file.ReadBigEndianInt32();
+
+                        if (imc.DataRawSize != imc.Entries.Sum(t => t.RawSize))
+                        {
+                            throw new InvalidDataException();
+                        }
+
+                        foreach (var entry in imc.Entries)
+                        {
+                            entry.Data = file.ReadBytes(entry.CompressedSize);
+                        }
+                    }
+                    else
                     {
                         throw new InvalidDataException();
-                    }
-
-                    imc.DataRawSize = file.ReadBigEndianInt32();
-
-                    if (imc.DataRawSize != imc.Entries.Sum(t => t.RawSize))
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    foreach (var entry in imc.Entries)
-                    {
-                        entry.Data = file.ReadBytes(entry.CompressedSize);
                     }
 
                     if (file.BaseStream.Position != file.BaseStream.Length)
@@ -393,6 +418,13 @@ namespace JeremyAnsel.Xwa.Imc
             this.SetRawData(wav.Data, wav.BitsPerSample, wav.SampleRate, wav.Channels);
         }
 
+        public void SetRawDataFromWave(Stream stream)
+        {
+            var wav = WaveFile.FromStream(stream);
+
+            this.SetRawData(wav.Data, wav.BitsPerSample, wav.SampleRate, wav.Channels);
+        }
+
         public Stream RetrieveWaveStream()
         {
             return this.RetrieveWaveStream(0, this.Length);
@@ -430,7 +462,7 @@ namespace JeremyAnsel.Xwa.Imc
             return stream;
         }
 
-        private static void ReadMap(ImcFile imc, BinaryReader file, int imusRawSize)
+        private static void ReadMap(ImcFile imc, BinaryReader file /*, int imusRawSize*/)
         {
             int mapSize = file.ReadBigEndianInt32();
 
@@ -479,12 +511,14 @@ namespace JeremyAnsel.Xwa.Imc
                         throw new InvalidDataException();
                     }
 
-                    int position = file.ReadBigEndianInt32() - frmtPosition;
+                    //int position = file.ReadBigEndianInt32() - frmtPosition;
+                    file.ReadBigEndianInt32();
 
-                    if (position != imusRawSize - mapSize - 16)
-                    {
-                        throw new InvalidDataException();
-                    }
+                    // TODO
+                    //if (position != imusRawSize - mapSize - 16)
+                    //{
+                    //    throw new InvalidDataException();
+                    //}
 
                     break;
                 }

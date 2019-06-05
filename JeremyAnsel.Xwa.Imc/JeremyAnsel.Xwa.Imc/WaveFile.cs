@@ -34,87 +34,78 @@ namespace JeremyAnsel.Xwa.Imc
 
         public static WaveFile FromFile(string fileName)
         {
+            using (var filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                return WaveFile.FromStream(filestream);
+            }
+        }
+
+        public static WaveFile FromStream(Stream stream)
+        {
             var wav = new WaveFile();
 
-            FileStream filestream = null;
+            var file = new BinaryReader(stream);
 
-            try
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "RIFF")
             {
-                filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-
-                using (BinaryReader file = new BinaryReader(filestream))
-                {
-                    filestream = null;
-
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "RIFF")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    //// file size
-                    file.ReadInt32();
-
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "WAVE")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "fmt ")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    int fmtSize = file.ReadInt32();
-
-                    if (fmtSize < 16)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    if (file.ReadInt16() != 1)
-                    {
-                        throw new NotSupportedException();
-                    }
-
-                    wav.Channels = file.ReadInt16();
-                    wav.SampleRate = file.ReadInt32();
-
-                    int avgBytesPerSec = file.ReadInt32();
-                    int blockAlign = file.ReadInt16();
-
-                    wav.BitsPerSample = file.ReadInt16();
-
-                    if (blockAlign != wav.BlockAlign)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    if (avgBytesPerSec != wav.AvgBytesPerSec)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    file.BaseStream.Seek(fmtSize - 16, SeekOrigin.Current);
-
-                    while (Encoding.ASCII.GetString(file.ReadBytes(4)) != "data")
-                    {
-                        int chunkSize = file.ReadInt32();
-
-                        file.BaseStream.Seek(chunkSize, SeekOrigin.Current);
-                    }
-
-                    int dataSize = file.ReadInt32();
-
-                    wav.Data = file.ReadBytes(dataSize);
-                }
+                throw new InvalidDataException();
             }
-            finally
+
+            //// file size
+            file.ReadInt32();
+
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "WAVE")
             {
-                if (filestream != null)
-                {
-                    filestream.Dispose();
-                }
+                throw new InvalidDataException();
             }
+
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "fmt ")
+            {
+                throw new InvalidDataException();
+            }
+
+            int fmtSize = file.ReadInt32();
+
+            if (fmtSize < 16)
+            {
+                throw new InvalidDataException();
+            }
+
+            if (file.ReadInt16() != 1)
+            {
+                throw new NotSupportedException();
+            }
+
+            wav.Channels = file.ReadInt16();
+            wav.SampleRate = file.ReadInt32();
+
+            int avgBytesPerSec = file.ReadInt32();
+            int blockAlign = file.ReadInt16();
+
+            wav.BitsPerSample = file.ReadInt16();
+
+            if (blockAlign != wav.BlockAlign)
+            {
+                throw new InvalidDataException();
+            }
+
+            if (avgBytesPerSec != wav.AvgBytesPerSec)
+            {
+                throw new InvalidDataException();
+            }
+
+            file.BaseStream.Seek(fmtSize - 16, SeekOrigin.Current);
+
+            while (Encoding.ASCII.GetString(file.ReadBytes(4)) != "data")
+            {
+                int chunkSize = file.ReadInt32();
+
+                file.BaseStream.Seek(chunkSize, SeekOrigin.Current);
+            }
+
+            int dataSize = file.ReadInt32();
+
+            wav.Data = file.ReadBytes(dataSize);
 
             return wav;
         }
@@ -123,11 +114,16 @@ namespace JeremyAnsel.Xwa.Imc
         {
             using (FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
-                var header = this.BuildHeader();
-
-                file.Write(header, 0, header.Length);
-                file.Write(this.Data, 0, this.Data.Length);
+                this.Save(file);
             }
+        }
+
+        public void Save(Stream file)
+        {
+            var header = this.BuildHeader();
+
+            file.Write(header, 0, header.Length);
+            file.Write(this.Data, 0, this.Data.Length);
         }
 
         public byte[] BuildHeader()
