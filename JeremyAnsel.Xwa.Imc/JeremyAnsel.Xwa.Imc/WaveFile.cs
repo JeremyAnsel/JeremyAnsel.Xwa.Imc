@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,7 @@ namespace JeremyAnsel.Xwa.Imc
             }
         }
 
+        [SuppressMessage("Reliability", "CA2000:Supprimer les objets avant la mise hors de portée", Justification = "Reviewed.")]
         public static WaveFile FromStream(Stream stream)
         {
             var wav = new WaveFile();

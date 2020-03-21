@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,6 @@ namespace JeremyAnsel.Xwa.Imc
     {
         public ImcFile()
         {
-            this.Entries = new List<ImcEntry>();
-            this.Codecs = new List<string>();
-            this.Map = new List<ImcMapItem>();
-
             this.BitsPerSample = 16;
             this.SampleRate = 22050;
             this.Channels = 1;
@@ -69,17 +66,19 @@ namespace JeremyAnsel.Xwa.Imc
             }
         }
 
-        public IList<ImcMapItem> Map { get; private set; }
+        public IList<ImcMapItem> Map { get; } = new List<ImcMapItem>();
 
-        private IList<ImcEntry> Entries { get; set; }
+        private IList<ImcEntry> Entries { get; } = new List<ImcEntry>();
 
-        private IList<string> Codecs { get; set; }
+        private IList<string> Codecs { get; } = new List<string>();
 
+        [SuppressMessage("Style", "IDE0017:Simplifier l'initialisation des objets", Justification = "Reviewed.")]
         public static ImcFile FromFile(string fileName)
         {
-            var imc = new ImcFile();
-
-            imc.FileName = fileName;
+            var imc = new ImcFile
+            {
+                FileName = fileName
+            };
 
             FileStream filestream = null;
 
@@ -184,7 +183,7 @@ namespace JeremyAnsel.Xwa.Imc
 
                     if (file.BaseStream.Position != file.BaseStream.Length)
                     {
-                        throw new InvalidDataException("End of file not reached.");
+                        throw new InvalidDataException();
                     }
 
                     imc.ComputeEntriesOffsets();
@@ -213,8 +212,7 @@ namespace JeremyAnsel.Xwa.Imc
                 {
                     filestream = null;
 
-                    int mapSize;
-                    var blocks = this.BuildMapBlocks(out mapSize);
+                    var blocks = this.BuildMapBlocks(out int mapSize);
 
                     file.Write(Encoding.ASCII.GetBytes("MCMP"));
 
@@ -316,12 +314,12 @@ namespace JeremyAnsel.Xwa.Imc
 
             if (start < 0 || start > this.DataRawSize)
             {
-                throw new ArgumentOutOfRangeException("start");
+                throw new ArgumentOutOfRangeException(nameof(start));
             }
 
             if (end < start || end > this.DataRawSize)
             {
-                throw new ArgumentOutOfRangeException("end");
+                throw new ArgumentOutOfRangeException(nameof(end));
             }
 
             byte[] data = new byte[end - start];
@@ -360,22 +358,22 @@ namespace JeremyAnsel.Xwa.Imc
         {
             if (data == null)
             {
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
             }
 
             if (bitsPerSample != 16)
             {
-                throw new ArgumentOutOfRangeException("bitsPerSample");
+                throw new ArgumentOutOfRangeException(nameof(bitsPerSample));
             }
 
             if (sampleRate <= 0)
             {
-                throw new ArgumentOutOfRangeException("sampleRate");
+                throw new ArgumentOutOfRangeException(nameof(sampleRate));
             }
 
             if (channels < 1 || channels > 2)
             {
-                throw new ArgumentOutOfRangeException("channels");
+                throw new ArgumentOutOfRangeException(nameof(channels));
             }
 
             this.Entries.Clear();
@@ -600,11 +598,18 @@ namespace JeremyAnsel.Xwa.Imc
 
         private List<ImcBlock> BuildMapBlocks(out int mapSize)
         {
-            this.Map = this.Map.OrderBy(t => t.Position).ToList();
+            List<ImcMapItem> mapItems = this.Map.OrderBy(t => t.Position).ToList();
+
+            this.Map.Clear();
+
+            foreach (ImcMapItem map in mapItems)
+            {
+                this.Map.Add(map);
+            }
 
             var blocks = new List<ImcBlock>();
 
-            Action<int> fillRegion = (position) =>
+            void fillRegion(int position)
             {
                 var lastPosition = blocks.Count != 0 ? blocks.Last().Position : 0;
 
@@ -616,7 +621,7 @@ namespace JeremyAnsel.Xwa.Imc
                         Length = position - lastPosition
                     });
                 }
-            };
+            }
 
             int blockAlign = this.BlockAlign;
 
@@ -624,10 +629,7 @@ namespace JeremyAnsel.Xwa.Imc
             {
                 fillRegion(item.Position * blockAlign);
 
-                ImcText text;
-                ImcJump jump;
-
-                if ((text = item as ImcText) != null)
+                if (item is ImcText text)
                 {
                     blocks.Add(new ImcTextBlock
                     {
@@ -635,7 +637,7 @@ namespace JeremyAnsel.Xwa.Imc
                         Text = text.Text
                     });
                 }
-                else if ((jump = item as ImcJump) != null)
+                else if (item is ImcJump jump)
                 {
                     blocks.Add(new ImcJumpBlock
                     {

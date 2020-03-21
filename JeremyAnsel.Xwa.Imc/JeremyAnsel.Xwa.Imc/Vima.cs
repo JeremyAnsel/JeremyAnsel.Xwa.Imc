@@ -20,7 +20,7 @@ namespace JeremyAnsel.Xwa.Imc
             15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794, 32767
         };
 
-        private static ushort[] VimaPredictTable = BuildPredictTable();
+        private static readonly ushort[] VimaPredictTable = BuildPredictTable();
 
         private static readonly byte[] SizeTable =
         {
@@ -134,12 +134,12 @@ namespace JeremyAnsel.Xwa.Imc
         {
             if (input == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
             }
 
             if (decompressedSize <= 0)
             {
-                throw new ArgumentOutOfRangeException("decompressedSize");
+                throw new ArgumentOutOfRangeException(nameof(decompressedSize));
             }
 
             int inputIndex = 0;
@@ -266,12 +266,12 @@ namespace JeremyAnsel.Xwa.Imc
         {
             if (input == null)
             {
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
             }
 
             if (channelsCount < 1 || channelsCount > 2)
             {
-                throw new ArgumentOutOfRangeException("channelsCount");
+                throw new ArgumentOutOfRangeException(nameof(channelsCount));
             }
 
             byte[] destBuffer = new byte[input.Length * 2 + channelsCount * 3];
