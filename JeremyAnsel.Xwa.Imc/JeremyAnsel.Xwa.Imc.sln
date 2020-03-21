@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeremyAnsel.Xwa.Imc", "JeremyAnsel.Xwa.Imc\JeremyAnsel.Xwa.Imc.csproj", "{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentation\Documentation.csproj", "{15F01691-F4A1-4990-9A8A-4DFBF1BFF3AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02} = {BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA691881-4DAD-4EBD-8966-DCB4EA0F3C02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F01691-F4A1-4990-9A8A-4DFBF1BFF3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F01691-F4A1-4990-9A8A-4DFBF1BFF3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F01691-F4A1-4990-9A8A-4DFBF1BFF3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F01691-F4A1-4990-9A8A-4DFBF1BFF3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74D7D234-F437-400E-9459-BB3AB1B0AECC}
+	EndGlobalSection
+EndGlobal
