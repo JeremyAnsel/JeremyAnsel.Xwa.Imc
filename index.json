@@ -1,28 +1,28 @@
 {
+  "api/JeremyAnsel.Xwa.Imc.html": {
+    "href": "api/JeremyAnsel.Xwa.Imc.html",
+    "title": "Namespace JeremyAnsel.Xwa.Imc",
+    "keywords": "Namespace JeremyAnsel.Xwa.Imc Classes ImcFile ImcJump ImcMapItem ImcText Vima"
+  },
   "api/JeremyAnsel.Xwa.Imc.ImcMapItem.html": {
     "href": "api/JeremyAnsel.Xwa.Imc.ImcMapItem.html",
     "title": "Class ImcMapItem",
     "keywords": "Class ImcMapItem Inheritance Object ImcMapItem ImcJump ImcText Inherited Members Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Object.ToString() Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public abstract class ImcMapItem Properties | Improve this Doc View Source Position Declaration public int Position { get; set; } Property Value Type Description Int32"
-  },
-  "api/JeremyAnsel.Xwa.Imc.ImcText.html": {
-    "href": "api/JeremyAnsel.Xwa.Imc.ImcText.html",
-    "title": "Class ImcText",
-    "keywords": "Class ImcText Inheritance Object ImcMapItem ImcText Inherited Members ImcMapItem.Position Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public sealed class ImcText : ImcMapItem Properties | Improve this Doc View Source Text Declaration public string Text { get; set; } Property Value Type Description String Methods | Improve this Doc View Source ToString() Declaration public override string ToString() Returns Type Description String Overrides Object.ToString()"
-  },
-  "api/JeremyAnsel.Xwa.Imc.ImcJump.html": {
-    "href": "api/JeremyAnsel.Xwa.Imc.ImcJump.html",
-    "title": "Class ImcJump",
-    "keywords": "Class ImcJump Inheritance Object ImcMapItem ImcJump Inherited Members ImcMapItem.Position Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public sealed class ImcJump : ImcMapItem Constructors | Improve this Doc View Source ImcJump() Declaration public ImcJump() Properties | Improve this Doc View Source Delay Declaration public int Delay { get; set; } Property Value Type Description Int32 | Improve this Doc View Source Destination Declaration public int Destination { get; set; } Property Value Type Description Int32 | Improve this Doc View Source HookId Declaration public int HookId { get; set; } Property Value Type Description Int32 Methods | Improve this Doc View Source ToString() Declaration public override string ToString() Returns Type Description String Overrides Object.ToString()"
   },
   "api/JeremyAnsel.Xwa.Imc.Vima.html": {
     "href": "api/JeremyAnsel.Xwa.Imc.Vima.html",
     "title": "Class Vima",
     "keywords": "Class Vima Inheritance Object Vima Inherited Members Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Object.ToString() Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public static class Vima Methods | Improve this Doc View Source Compress(Byte[], Int32) Declaration public static byte[] Compress(byte[] input, int channelsCount) Parameters Type Name Description Byte [] input Int32 channelsCount Returns Type Description Byte [] | Improve this Doc View Source Decompress(Byte[], Int32) Declaration public static byte[] Decompress(byte[] input, int decompressedSize) Parameters Type Name Description Byte [] input Int32 decompressedSize Returns Type Description Byte []"
   },
-  "api/JeremyAnsel.Xwa.Imc.html": {
-    "href": "api/JeremyAnsel.Xwa.Imc.html",
-    "title": "Namespace JeremyAnsel.Xwa.Imc",
-    "keywords": "Namespace JeremyAnsel.Xwa.Imc Classes ImcFile ImcJump ImcMapItem ImcText Vima"
+  "api/JeremyAnsel.Xwa.Imc.ImcJump.html": {
+    "href": "api/JeremyAnsel.Xwa.Imc.ImcJump.html",
+    "title": "Class ImcJump",
+    "keywords": "Class ImcJump Inheritance Object ImcMapItem ImcJump Inherited Members ImcMapItem.Position Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public sealed class ImcJump : ImcMapItem Constructors | Improve this Doc View Source ImcJump() Declaration public ImcJump() Properties | Improve this Doc View Source Delay Declaration public int Delay { get; set; } Property Value Type Description Int32 | Improve this Doc View Source Destination Declaration public int Destination { get; set; } Property Value Type Description Int32 | Improve this Doc View Source HookId Declaration public int HookId { get; set; } Property Value Type Description Int32 Methods | Improve this Doc View Source ToString() Declaration public override string ToString() Returns Type Description String Overrides Object.ToString()"
+  },
+  "api/JeremyAnsel.Xwa.Imc.ImcText.html": {
+    "href": "api/JeremyAnsel.Xwa.Imc.ImcText.html",
+    "title": "Class ImcText",
+    "keywords": "Class ImcText Inheritance Object ImcMapItem ImcText Inherited Members ImcMapItem.Position Object.Equals(Object) Object.Equals(Object, Object) Object.GetHashCode() Object.GetType() Object.MemberwiseClone() Object.ReferenceEquals(Object, Object) Namespace : JeremyAnsel.Xwa.Imc Assembly : JeremyAnsel.Xwa.Imc.dll Syntax public sealed class ImcText : ImcMapItem Properties | Improve this Doc View Source Text Declaration public string Text { get; set; } Property Value Type Description String Methods | Improve this Doc View Source ToString() Declaration public override string ToString() Returns Type Description String Overrides Object.ToString()"
   },
   "api/index.html": {
     "href": "api/index.html",
