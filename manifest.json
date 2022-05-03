@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.ImcFile.html",
-          "hash": "+tWIkTqryAC47SRIJqkZKQ=="
+          "hash": "6dCMCxVI8qrPMQFnKNkYA+3w94fy4mHsjgQBexgkSbc="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.ImcJump.html",
-          "hash": "6rG6oV8FiUV9Tyytxxn6CA=="
+          "hash": "uKQv4UWt9z8XyTm3YfAdzpln8l6xAjZR5l5jXHwrrxI="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.ImcMapItem.html",
-          "hash": "jqZmNaKi4N4UhuoziDql1w=="
+          "hash": "b7R8bW0PwG58CSoZnYQ9hxi8vRJ+Gy0mhdIH3WzTrq0="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.ImcText.html",
-          "hash": "qP9QrL0qIFxgzPdvbsjVTg=="
+          "hash": "CH3kGQw+loCr1m/J7FhUhMXikaeAaDyULwcfW9Qg1O0="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.Vima.html",
-          "hash": "5j9jsntPPd2ERNqRD0GZgA=="
+          "hash": "uNfzkxImsaoT5VGWg8SyUbV+tJJHXREpHdLmPNsPEvQ="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/JeremyAnsel.Xwa.Imc.html",
-          "hash": "EARl+0150mY/mJq5xI9REA=="
+          "hash": "K0fzPHYFlo434Z/p5VvhoOidvHAPEWbOW3e818kNYCs="
         }
       },
       "is_incremental": false,
@@ -90,19 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "zauGMBj33zSnpGFmFrlR/g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "1YGYZSjts/x+PAKugPiLmQ=="
+          "hash": "CGVpGhSBoGtKzjm4NGP6Yq3h6uInlvaYV0qoN3ostUo="
         }
       },
       "is_incremental": false,
@@ -114,19 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "gTuGMhdV4jU8QwvZy/QVxA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "toc.html",
-          "hash": "GHcQXNwuQ4cVV61zF9xL4Q=="
+          "hash": "/osF8m3D4LTFxZjgs6bwGOEhig3/pcWEYV59lTT1IHQ="
         }
       },
       "is_incremental": false,
