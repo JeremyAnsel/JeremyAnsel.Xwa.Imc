@@ -72,193 +72,172 @@ namespace JeremyAnsel.Xwa.Imc
 
         private IList<string> Codecs { get; } = new List<string>();
 
-        [SuppressMessage("Style", "IDE0017:Simplifier l'initialisation des objets", Justification = "Reviewed.")]
         public static ImcFile FromFile(string fileName)
         {
-            var imc = new ImcFile
+            using var filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+
+            ImcFile imc = FromStream(filestream);
+            imc.FileName = fileName;
+
+            return imc;
+        }
+
+        [SuppressMessage("Style", "IDE0017:Simplifier l'initialisation des objets", Justification = "Reviewed.")]
+        public static ImcFile FromStream(Stream stream)
+        {
+            var imc = new ImcFile();
+
+            using var file = new BinaryReader(stream, Encoding.ASCII, true);
+
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "MCMP")
             {
-                FileName = fileName
-            };
+                throw new InvalidDataException();
+            }
 
-            FileStream filestream = null;
+            int entriesCount = file.ReadBigEndianInt16();
 
-            try
+            file.BaseStream.Seek(9, SeekOrigin.Current);
+
+            for (int i = 0; i < entriesCount - 1; i++)
             {
-                filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                var entry = new ImcEntry();
 
-                using (BinaryReader file = new BinaryReader(filestream))
+                entry.Codec = file.ReadByte();
+                entry.RawSize = file.ReadBigEndianInt32();
+                entry.CompressedSize = file.ReadBigEndianInt32();
+
+                imc.Entries.Add(entry);
+            }
+
+            int codecsCount = file.ReadBigEndianInt16() / 5;
+
+            for (int i = 0; i < codecsCount; i++)
+            {
+                imc.Codecs.Add(Encoding.ASCII.GetString(file.ReadBytes(4)));
+                file.ReadByte();
+            }
+
+            if (imc.Codecs.Count != 2
+                || !string.Equals(imc.Codecs[0], "NULL", StringComparison.Ordinal)
+                || !string.Equals(imc.Codecs[1], "VIMA", StringComparison.Ordinal))
+            {
+                throw new NotSupportedException();
+            }
+
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "iMUS")
+            {
+                throw new InvalidDataException();
+            }
+
+            //int imusRawSize = file.ReadInt32();
+            file.ReadInt32();
+
+            if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "MAP ")
+            {
+                throw new InvalidDataException();
+            }
+
+            ImcFile.ReadMap(imc, file /*, imusRawSize*/);
+
+            string fourcc = Encoding.ASCII.GetString(file.ReadBytes(4));
+
+            if (fourcc == "RIFF")
+            {
+                file.BaseStream.Seek(-4, SeekOrigin.Current);
+
+                //var wav = WaveFile.FromStream(file.BaseStream);
+
+                //imc.DataRawSize = wav.Data.Length;
+
+                //var entry = new ImcEntry
+                //{
+                //    Codec = 0,
+                //    RawSize = wav.Data.Length,
+                //    CompressedSize = wav.Data.Length,
+                //    Data = wav.Data
+                //};
+
+                //imc.Entries.Add(entry);
+
+                imc.SetRawDataFromWave(file.BaseStream);
+            }
+            else if (fourcc == "DATA")
+            {
+                imc.DataRawSize = file.ReadBigEndianInt32();
+
+                if (imc.DataRawSize != imc.Entries.Sum(t => t.RawSize))
                 {
-                    filestream = null;
+                    throw new InvalidDataException();
+                }
 
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "MCMP")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    int entriesCount = file.ReadBigEndianInt16();
-
-                    file.BaseStream.Seek(9, SeekOrigin.Current);
-
-                    for (int i = 0; i < entriesCount - 1; i++)
-                    {
-                        var entry = new ImcEntry();
-
-                        entry.Codec = file.ReadByte();
-                        entry.RawSize = file.ReadBigEndianInt32();
-                        entry.CompressedSize = file.ReadBigEndianInt32();
-
-                        imc.Entries.Add(entry);
-                    }
-
-                    int codecsCount = file.ReadBigEndianInt16() / 5;
-
-                    for (int i = 0; i < codecsCount; i++)
-                    {
-                        imc.Codecs.Add(Encoding.ASCII.GetString(file.ReadBytes(4)));
-                        file.ReadByte();
-                    }
-
-                    if (imc.Codecs.Count != 2
-                        || !string.Equals(imc.Codecs[0], "NULL", StringComparison.Ordinal)
-                        || !string.Equals(imc.Codecs[1], "VIMA", StringComparison.Ordinal))
-                    {
-                        throw new NotSupportedException();
-                    }
-
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "iMUS")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    //int imusRawSize = file.ReadInt32();
-                    file.ReadInt32();
-
-                    if (Encoding.ASCII.GetString(file.ReadBytes(4)) != "MAP ")
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    ImcFile.ReadMap(imc, file /*, imusRawSize*/);
-
-                    string fourcc = Encoding.ASCII.GetString(file.ReadBytes(4));
-
-                    if (fourcc == "RIFF")
-                    {
-                        file.BaseStream.Seek(-4, SeekOrigin.Current);
-
-                        //var wav = WaveFile.FromStream(file.BaseStream);
-
-                        //imc.DataRawSize = wav.Data.Length;
-
-                        //var entry = new ImcEntry
-                        //{
-                        //    Codec = 0,
-                        //    RawSize = wav.Data.Length,
-                        //    CompressedSize = wav.Data.Length,
-                        //    Data = wav.Data
-                        //};
-
-                        //imc.Entries.Add(entry);
-
-                        imc.SetRawDataFromWave(file.BaseStream);
-                    }
-                    else if (fourcc == "DATA")
-                    {
-                        imc.DataRawSize = file.ReadBigEndianInt32();
-
-                        if (imc.DataRawSize != imc.Entries.Sum(t => t.RawSize))
-                        {
-                            throw new InvalidDataException();
-                        }
-
-                        foreach (var entry in imc.Entries)
-                        {
-                            entry.Data = file.ReadBytes(entry.CompressedSize);
-                        }
-                    }
-                    else
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    if (file.BaseStream.Position != file.BaseStream.Length)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    imc.ComputeEntriesOffsets();
+                foreach (var entry in imc.Entries)
+                {
+                    entry.Data = file.ReadBytes(entry.CompressedSize);
                 }
             }
-            finally
+            else
             {
-                if (filestream != null)
-                {
-                    filestream.Dispose();
-                }
+                throw new InvalidDataException();
             }
+
+            if (file.BaseStream.Position != file.BaseStream.Length)
+            {
+                throw new InvalidDataException();
+            }
+
+            imc.ComputeEntriesOffsets();
 
             return imc;
         }
 
         public void Save(string fileName)
         {
-            FileStream filestream = null;
+            using var filestream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
-            try
+            this.Save(filestream);
+            this.FileName = fileName;
+        }
+
+        public void Save(Stream stream)
+        {
+            using var file = new BinaryWriter(stream, Encoding.ASCII, true);
+
+            var blocks = this.BuildMapBlocks(out int mapSize);
+
+            file.Write(Encoding.ASCII.GetBytes("MCMP"));
+
+            file.WriteBigEndian((short)(this.Entries.Count + 1));
+
+            file.Write((byte)0);
+            file.WriteBigEndian(mapSize + 24);
+            file.WriteBigEndian(mapSize + 24);
+
+            foreach (var entry in this.Entries)
             {
-                filestream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-
-                using (BinaryWriter file = new BinaryWriter(filestream))
-                {
-                    filestream = null;
-
-                    var blocks = this.BuildMapBlocks(out int mapSize);
-
-                    file.Write(Encoding.ASCII.GetBytes("MCMP"));
-
-                    file.WriteBigEndian((short)(this.Entries.Count + 1));
-
-                    file.Write((byte)0);
-                    file.WriteBigEndian(mapSize + 24);
-                    file.WriteBigEndian(mapSize + 24);
-
-                    foreach (var entry in this.Entries)
-                    {
-                        file.Write(entry.Codec);
-                        file.WriteBigEndian(entry.RawSize);
-                        file.WriteBigEndian(entry.CompressedSize);
-                    }
-
-                    file.WriteBigEndian((short)(this.Codecs.Count * 5));
-
-                    foreach (var codec in this.Codecs)
-                    {
-                        file.Write(Encoding.ASCII.GetBytes(codec));
-                        file.Write((byte)0);
-                    }
-
-                    file.Write(Encoding.ASCII.GetBytes("iMUS"));
-                    file.Write(this.DataRawSize + mapSize + 16);
-
-                    ImcFile.WriteMap(this, file, blocks, mapSize);
-
-                    file.Write(Encoding.ASCII.GetBytes("DATA"));
-                    file.WriteBigEndian(this.DataRawSize);
-
-                    foreach (var entry in this.Entries)
-                    {
-                        file.Write(entry.Data);
-                    }
-
-                    this.FileName = fileName;
-                }
+                file.Write(entry.Codec);
+                file.WriteBigEndian(entry.RawSize);
+                file.WriteBigEndian(entry.CompressedSize);
             }
-            finally
+
+            file.WriteBigEndian((short)(this.Codecs.Count * 5));
+
+            foreach (var codec in this.Codecs)
             {
-                if (filestream != null)
-                {
-                    filestream.Dispose();
-                }
+                file.Write(Encoding.ASCII.GetBytes(codec));
+                file.Write((byte)0);
+            }
+
+            file.Write(Encoding.ASCII.GetBytes("iMUS"));
+            file.Write(this.DataRawSize + mapSize + 16);
+
+            ImcFile.WriteMap(this, file, blocks, mapSize);
+
+            file.Write(Encoding.ASCII.GetBytes("DATA"));
+            file.WriteBigEndian(this.DataRawSize);
+
+            foreach (var entry in this.Entries)
+            {
+                file.Write(entry.Data);
             }
         }
 
@@ -275,6 +254,21 @@ namespace JeremyAnsel.Xwa.Imc
             };
 
             wav.Save(fileName);
+        }
+
+        public void SaveAsWave(Stream stream)
+        {
+            var data = this.RetrieveRawData();
+
+            var wav = new WaveFile
+            {
+                Channels = this.Channels,
+                SampleRate = this.SampleRate,
+                BitsPerSample = this.BitsPerSample,
+                Data = data
+            };
+
+            wav.Save(stream);
         }
 
         public byte[] RetrieveRawData()
