@@ -126,6 +126,19 @@ references:
   isSpec: "True"
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromFile
   nameWithType: ImcFile.FromFile
+- uid: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
+  name: FromStream(Stream)
+  href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_FromStream_System_IO_Stream_
+  commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
+  nameWithType: ImcFile.FromStream(Stream)
+- uid: JeremyAnsel.Xwa.Imc.ImcFile.FromStream*
+  name: FromStream
+  href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_FromStream_
+  commentId: Overload:JeremyAnsel.Xwa.Imc.ImcFile.FromStream
+  isSpec: "True"
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromStream
+  nameWithType: ImcFile.FromStream
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.Length
   name: Length
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_Length
@@ -222,6 +235,12 @@ references:
   isSpec: "True"
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.SampleRate
   nameWithType: ImcFile.SampleRate
+- uid: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
+  name: Save(Stream)
+  href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_Save_System_IO_Stream_
+  commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
+  nameWithType: ImcFile.Save(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.String)
   name: Save(string)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_Save_System_String_
@@ -238,6 +257,12 @@ references:
   isSpec: "True"
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save
   nameWithType: ImcFile.Save
+- uid: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
+  name: SaveAsWave(Stream)
+  href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SaveAsWave_System_IO_Stream_
+  commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
+  nameWithType: ImcFile.SaveAsWave(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.String)
   name: SaveAsWave(string)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SaveAsWave_System_String_
