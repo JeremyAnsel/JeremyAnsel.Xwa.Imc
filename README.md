@@ -12,3 +12,9 @@ Documentation   | http://jeremyansel.github.io/JeremyAnsel.Xwa.Imc
 Source code     | https://github.com/JeremyAnsel/JeremyAnsel.Xwa.Imc
 Nuget           | https://www.nuget.org/packages/JeremyAnsel.Xwa.Imc
 Build           | https://ci.appveyor.com/project/JeremyAnsel/jeremyansel-xwa-imc/branch/master
+
+# Usage
+
+```csharp
+ImcFile file = ImcFile.FromFile(fileName);
+```
