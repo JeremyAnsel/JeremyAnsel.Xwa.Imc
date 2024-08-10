@@ -111,13 +111,13 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.FileName
   nameWithType: ImcFile.FileName
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.FromFile(System.String)
-  name: FromFile(string)
+  name: FromFile(string?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_FromFile_System_String_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.FromFile(System.String)
   name.vb: FromFile(String)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromFile(string)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromFile(string?)
   fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.FromFile(String)
-  nameWithType: ImcFile.FromFile(string)
+  nameWithType: ImcFile.FromFile(string?)
   nameWithType.vb: ImcFile.FromFile(String)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.FromFile*
   name: FromFile
@@ -127,11 +127,14 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromFile
   nameWithType: ImcFile.FromFile
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
-  name: FromStream(Stream)
+  name: FromStream(Stream?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_FromStream_System_IO_Stream_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
-  nameWithType: ImcFile.FromStream(Stream)
+  name.vb: FromStream(Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream?)
+  fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.FromStream(System.IO.Stream)
+  nameWithType: ImcFile.FromStream(Stream?)
+  nameWithType.vb: ImcFile.FromStream(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.FromStream*
   name: FromStream
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_FromStream_
@@ -236,19 +239,22 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.SampleRate
   nameWithType: ImcFile.SampleRate
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
-  name: Save(Stream)
+  name: Save(Stream?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_Save_System_IO_Stream_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
-  nameWithType: ImcFile.Save(Stream)
+  name.vb: Save(Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream?)
+  fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.IO.Stream)
+  nameWithType: ImcFile.Save(Stream?)
+  nameWithType.vb: ImcFile.Save(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.Save(System.String)
-  name: Save(string)
+  name: Save(string?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_Save_System_String_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.Save(System.String)
   name.vb: Save(String)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save(string)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save(string?)
   fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.Save(String)
-  nameWithType: ImcFile.Save(string)
+  nameWithType: ImcFile.Save(string?)
   nameWithType.vb: ImcFile.Save(String)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.Save*
   name: Save
@@ -258,19 +264,22 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.Save
   nameWithType: ImcFile.Save
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
-  name: SaveAsWave(Stream)
+  name: SaveAsWave(Stream?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SaveAsWave_System_IO_Stream_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
-  nameWithType: ImcFile.SaveAsWave(Stream)
+  name.vb: SaveAsWave(Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream?)
+  fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.IO.Stream)
+  nameWithType: ImcFile.SaveAsWave(Stream?)
+  nameWithType.vb: ImcFile.SaveAsWave(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.String)
-  name: SaveAsWave(string)
+  name: SaveAsWave(string?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SaveAsWave_System_String_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(System.String)
   name.vb: SaveAsWave(String)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(string)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(string?)
   fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave(String)
-  nameWithType: ImcFile.SaveAsWave(string)
+  nameWithType: ImcFile.SaveAsWave(string?)
   nameWithType.vb: ImcFile.SaveAsWave(String)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave*
   name: SaveAsWave
@@ -280,13 +289,13 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.SaveAsWave
   nameWithType: ImcFile.SaveAsWave
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData(System.Byte[],System.Int32,System.Int32,System.Int32)
-  name: SetRawData(byte[], int, int, int)
+  name: SetRawData(byte[]?, int, int, int)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SetRawData_System_Byte___System_Int32_System_Int32_System_Int32_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SetRawData(System.Byte[],System.Int32,System.Int32,System.Int32)
   name.vb: SetRawData(Byte(), Integer, Integer, Integer)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData(byte[], int, int, int)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData(byte[]?, int, int, int)
   fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData(Byte(), Integer, Integer, Integer)
-  nameWithType: ImcFile.SetRawData(byte[], int, int, int)
+  nameWithType: ImcFile.SetRawData(byte[]?, int, int, int)
   nameWithType.vb: ImcFile.SetRawData(Byte(), Integer, Integer, Integer)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData*
   name: SetRawData
@@ -296,19 +305,22 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawData
   nameWithType: ImcFile.SetRawData
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.IO.Stream)
-  name: SetRawDataFromWave(Stream)
+  name: SetRawDataFromWave(Stream?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SetRawDataFromWave_System_IO_Stream_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.IO.Stream)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.IO.Stream)
-  nameWithType: ImcFile.SetRawDataFromWave(Stream)
+  name.vb: SetRawDataFromWave(Stream)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.IO.Stream?)
+  fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.IO.Stream)
+  nameWithType: ImcFile.SetRawDataFromWave(Stream?)
+  nameWithType.vb: ImcFile.SetRawDataFromWave(Stream)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.String)
-  name: SetRawDataFromWave(string)
+  name: SetRawDataFromWave(string?)
   href: api/JeremyAnsel.Xwa.Imc.ImcFile.html#JeremyAnsel_Xwa_Imc_ImcFile_SetRawDataFromWave_System_String_
   commentId: M:JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(System.String)
   name.vb: SetRawDataFromWave(String)
-  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(string)
+  fullName: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(string?)
   fullName.vb: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave(String)
-  nameWithType: ImcFile.SetRawDataFromWave(string)
+  nameWithType: ImcFile.SetRawDataFromWave(string?)
   nameWithType.vb: ImcFile.SetRawDataFromWave(String)
 - uid: JeremyAnsel.Xwa.Imc.ImcFile.SetRawDataFromWave*
   name: SetRawDataFromWave
@@ -465,13 +477,13 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.Vima
   nameWithType: Vima
 - uid: JeremyAnsel.Xwa.Imc.Vima.Compress(System.Byte[],System.Int32)
-  name: Compress(byte[], int)
+  name: Compress(byte[]?, int)
   href: api/JeremyAnsel.Xwa.Imc.Vima.html#JeremyAnsel_Xwa_Imc_Vima_Compress_System_Byte___System_Int32_
   commentId: M:JeremyAnsel.Xwa.Imc.Vima.Compress(System.Byte[],System.Int32)
   name.vb: Compress(Byte(), Integer)
-  fullName: JeremyAnsel.Xwa.Imc.Vima.Compress(byte[], int)
+  fullName: JeremyAnsel.Xwa.Imc.Vima.Compress(byte[]?, int)
   fullName.vb: JeremyAnsel.Xwa.Imc.Vima.Compress(Byte(), Integer)
-  nameWithType: Vima.Compress(byte[], int)
+  nameWithType: Vima.Compress(byte[]?, int)
   nameWithType.vb: Vima.Compress(Byte(), Integer)
 - uid: JeremyAnsel.Xwa.Imc.Vima.Compress*
   name: Compress
@@ -481,13 +493,13 @@ references:
   fullName: JeremyAnsel.Xwa.Imc.Vima.Compress
   nameWithType: Vima.Compress
 - uid: JeremyAnsel.Xwa.Imc.Vima.Decompress(System.Byte[],System.Int32)
-  name: Decompress(byte[], int)
+  name: Decompress(byte[]?, int)
   href: api/JeremyAnsel.Xwa.Imc.Vima.html#JeremyAnsel_Xwa_Imc_Vima_Decompress_System_Byte___System_Int32_
   commentId: M:JeremyAnsel.Xwa.Imc.Vima.Decompress(System.Byte[],System.Int32)
   name.vb: Decompress(Byte(), Integer)
-  fullName: JeremyAnsel.Xwa.Imc.Vima.Decompress(byte[], int)
+  fullName: JeremyAnsel.Xwa.Imc.Vima.Decompress(byte[]?, int)
   fullName.vb: JeremyAnsel.Xwa.Imc.Vima.Decompress(Byte(), Integer)
-  nameWithType: Vima.Decompress(byte[], int)
+  nameWithType: Vima.Decompress(byte[]?, int)
   nameWithType.vb: Vima.Decompress(Byte(), Integer)
 - uid: JeremyAnsel.Xwa.Imc.Vima.Decompress*
   name: Decompress
