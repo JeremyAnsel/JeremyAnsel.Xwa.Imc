@@ -31,10 +31,15 @@ namespace JeremyAnsel.Xwa.Imc
             }
         }
 
-        public byte[] Data { get; set; }
+        public byte[] Data { get; set; } = Array.Empty<byte>();
 
-        public static WaveFile FromFile(string fileName)
+        public static WaveFile FromFile(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             using (var filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
                 return WaveFile.FromStream(filestream);
@@ -42,8 +47,13 @@ namespace JeremyAnsel.Xwa.Imc
         }
 
         [SuppressMessage("Reliability", "CA2000:Supprimer les objets avant la mise hors de portée", Justification = "Reviewed.")]
-        public static WaveFile FromStream(Stream stream)
+        public static WaveFile FromStream(Stream? stream)
         {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var wav = new WaveFile();
 
             var file = new BinaryReader(stream);
@@ -112,8 +122,13 @@ namespace JeremyAnsel.Xwa.Imc
             return wav;
         }
 
-        public void Save(string fileName)
+        public void Save(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             using (FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
                 this.Save(file);
@@ -122,6 +137,11 @@ namespace JeremyAnsel.Xwa.Imc
 
         public void Save(Stream file)
         {
+            if (file is null)
+            {
+                throw new ArgumentNullException(nameof(file));
+            }
+
             var header = this.BuildHeader();
 
             file.Write(header, 0, header.Length);

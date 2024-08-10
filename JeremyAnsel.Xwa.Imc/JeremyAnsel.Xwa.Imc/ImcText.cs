@@ -8,7 +8,7 @@ namespace JeremyAnsel.Xwa.Imc
 {
     public sealed class ImcText : ImcMapItem
     {
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         public override string ToString()
         {

@@ -16,9 +16,9 @@ namespace JeremyAnsel.Xwa.Imc
             this.Channels = 1;
         }
 
-        public string FileName { get; private set; }
+        public string? FileName { get; private set; }
 
-        public string Name
+        public string? Name
         {
             get
             {
@@ -72,8 +72,13 @@ namespace JeremyAnsel.Xwa.Imc
 
         private IList<string> Codecs { get; } = new List<string>();
 
-        public static ImcFile FromFile(string fileName)
+        public static ImcFile FromFile(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             using var filestream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
             ImcFile imc = FromStream(filestream);
@@ -83,8 +88,13 @@ namespace JeremyAnsel.Xwa.Imc
         }
 
         [SuppressMessage("Style", "IDE0017:Simplifier l'initialisation des objets", Justification = "Reviewed.")]
-        public static ImcFile FromStream(Stream stream)
+        public static ImcFile FromStream(Stream? stream)
         {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var imc = new ImcFile();
 
             using var file = new BinaryReader(stream, Encoding.ASCII, true);
@@ -190,16 +200,26 @@ namespace JeremyAnsel.Xwa.Imc
             return imc;
         }
 
-        public void Save(string fileName)
+        public void Save(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             using var filestream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
             this.Save(filestream);
             this.FileName = fileName;
         }
 
-        public void Save(Stream stream)
+        public void Save(Stream? stream)
         {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             using var file = new BinaryWriter(stream, Encoding.ASCII, true);
 
             var blocks = this.BuildMapBlocks(out int mapSize);
@@ -237,12 +257,22 @@ namespace JeremyAnsel.Xwa.Imc
 
             foreach (var entry in this.Entries)
             {
+                if (entry.Data is null)
+                {
+                    continue;
+                }
+
                 file.Write(entry.Data);
             }
         }
 
-        public void SaveAsWave(string fileName)
+        public void SaveAsWave(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             var data = this.RetrieveRawData();
 
             var wav = new WaveFile
@@ -256,8 +286,13 @@ namespace JeremyAnsel.Xwa.Imc
             wav.Save(fileName);
         }
 
-        public void SaveAsWave(Stream stream)
+        public void SaveAsWave(Stream? stream)
         {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var data = this.RetrieveRawData();
 
             var wav = new WaveFile
@@ -280,15 +315,16 @@ namespace JeremyAnsel.Xwa.Imc
                 .ForAll(entry =>
                 {
                     byte[] buffer;
+                    byte[] entryData = entry.Data ?? Array.Empty<byte>();
 
                     switch (entry.Codec)
                     {
                         case 0:
-                            buffer = entry.Data;
+                            buffer = entryData;
                             break;
 
                         case 1:
-                            buffer = Vima.Decompress(entry.Data, entry.RawSize);
+                            buffer = Vima.Decompress(entryData, entry.RawSize);
                             break;
 
                         default:
@@ -324,15 +360,16 @@ namespace JeremyAnsel.Xwa.Imc
                 .ForAll(entry =>
                 {
                     byte[] buffer;
+                    byte[] entryData = entry.Data ?? Array.Empty<byte>();
 
                     switch (entry.Codec)
                     {
                         case 0:
-                            buffer = entry.Data;
+                            buffer = entryData;
                             break;
 
                         case 1:
-                            buffer = Vima.Decompress(entry.Data, entry.RawSize);
+                            buffer = Vima.Decompress(entryData, entry.RawSize);
                             break;
 
                         default:
@@ -348,7 +385,7 @@ namespace JeremyAnsel.Xwa.Imc
             return data;
         }
 
-        public void SetRawData(byte[] data, int bitsPerSample, int sampleRate, int channels)
+        public void SetRawData(byte[]? data, int bitsPerSample, int sampleRate, int channels)
         {
             if (data == null)
             {
@@ -403,15 +440,25 @@ namespace JeremyAnsel.Xwa.Imc
             this.ComputeEntriesOffsets();
         }
 
-        public void SetRawDataFromWave(string fileName)
+        public void SetRawDataFromWave(string? fileName)
         {
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
             var wav = WaveFile.FromFile(fileName);
 
             this.SetRawData(wav.Data, wav.BitsPerSample, wav.SampleRate, wav.Channels);
         }
 
-        public void SetRawDataFromWave(Stream stream)
+        public void SetRawDataFromWave(Stream? stream)
         {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var wav = WaveFile.FromStream(stream);
 
             this.SetRawData(wav.Data, wav.BitsPerSample, wav.SampleRate, wav.Channels);

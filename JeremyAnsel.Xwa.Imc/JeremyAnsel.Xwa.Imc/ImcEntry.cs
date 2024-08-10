@@ -17,6 +17,6 @@ namespace JeremyAnsel.Xwa.Imc
 
         //public int CompressedOffset { get; set; }
 
-        public byte[] Data { get; set; }
+        public byte[]? Data { get; set; }
     }
 }

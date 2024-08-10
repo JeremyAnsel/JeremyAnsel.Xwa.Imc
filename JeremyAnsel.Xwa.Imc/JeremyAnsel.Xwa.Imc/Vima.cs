@@ -87,7 +87,7 @@ namespace JeremyAnsel.Xwa.Imc
             5, 5, 5, 5, 6, 6, 6, 6,
         };
 
-        private static readonly sbyte[][] IndexTables =
+        private static readonly sbyte[]?[] IndexTables =
         {
             null,
             null,
@@ -130,7 +130,7 @@ namespace JeremyAnsel.Xwa.Imc
             return predictTable;
         }
 
-        public static byte[] Decompress(byte[] input, int decompressedSize)
+        public static byte[] Decompress(byte[]? input, int decompressedSize)
         {
             if (input == null)
             {
@@ -246,7 +246,7 @@ namespace JeremyAnsel.Xwa.Imc
 
                     destIndex += channelsCount * 2;
 
-                    currTablePos += IndexTables[numBits][val];
+                    currTablePos += IndexTables[numBits]![val];
 
                     if (currTablePos < 0)
                     {
@@ -262,7 +262,7 @@ namespace JeremyAnsel.Xwa.Imc
             return destBuffer;
         }
 
-        public static byte[] Compress(byte[] input, int channelsCount)
+        public static byte[] Compress(byte[]? input, int channelsCount)
         {
             if (input == null)
             {
@@ -396,7 +396,7 @@ namespace JeremyAnsel.Xwa.Imc
                         }
                     }
 
-                    currTablePos += IndexTables[numBits][val];
+                    currTablePos += IndexTables[numBits]![val];
 
                     if (currTablePos < 0)
                     {
